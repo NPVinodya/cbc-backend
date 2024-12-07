@@ -10,10 +10,25 @@ export async function getProduct(req,res){
             res.json({
                 message:"Error"
             })
+        }}
+    
+export function createProduct(req,res){    
+    console.log(req.user)
+    if(req.user == null){
+        res.json({
+            message:"You are not logged in"
+            })
+            return
         }
-    
-    
-}(()=>{
+        if(req.user.type != "admin"){
+            res.json({
+                message:"You are not an admin"
+                })
+                return
+        }
+        const product = new Product(req.body)
+
+        product.save().then(()=>{
         res.json({
             message:"Product Created"
             })
@@ -21,7 +36,7 @@ export async function getProduct(req,res){
         res.json({
             message:"Product not Created"
         })
-    })
+    })}
 
 export function deleteProduct(req,res){
     Product.deleteOne =({name:req.body.name}).then(()=>{
