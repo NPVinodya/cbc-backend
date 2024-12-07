@@ -1,24 +1,19 @@
 import Product from "../models/product.js";
 
-export function getProduct(req,res){
-    productRouter.find().then(
-        (productList)=>{
+export async function getProduct(req,res){
+    try{
+        const productList=await Product.find()
             res.json({
                 list:productList
             })
-        }
-    ).catch(
-        (err)=>{
+        }catch(e){
             res.json({
                 message:"Error"
             })
         }
-    ) 
-}
-export function createProduct(req,res){
-    const product = new Product(req.body)
-
-    product.save().then(()=>{
+    
+    
+}(()=>{
         res.json({
             message:"Product Created"
             })
@@ -27,7 +22,7 @@ export function createProduct(req,res){
             message:"Product not Created"
         })
     })
-}
+
 export function deleteProduct(req,res){
     Product.deleteOne =({name:req.body.name}).then(()=>{
         res.json({
