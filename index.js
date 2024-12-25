@@ -8,6 +8,7 @@ dotenv.config()
 
 import productRouter from './routes/productRouter.js';
 import userRouter from './routes/userRouter.js';
+import orderRouter from './routes/orderRouter.js';
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use(
 
 app.use("/api/products",productRouter)
 app.use("/api/users",userRouter)
+app.use("/api/orders",orderRouter)
 
 
 
