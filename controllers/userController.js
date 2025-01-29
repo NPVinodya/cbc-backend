@@ -1,6 +1,7 @@
 import User from "../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+
 import dotenv from "dotenv";
 
 
@@ -13,7 +14,7 @@ export function isAdmin(req){
         return true
     }
 }
-export function isCoustomer(req){
+export function isCustomer(req){
     if(req.user == null){
         return false
     }

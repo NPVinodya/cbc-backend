@@ -1,6 +1,6 @@
 import Product from "../models/product.js";
 import{isAdmin} from "./userController.js";
-import { getProducts } from '../controllers/productController.js'
+
 
 export function createProduct(req,res){
     if(isAdmin(req)){
