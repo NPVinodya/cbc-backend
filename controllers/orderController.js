@@ -21,6 +21,28 @@ export async function createOrder(req,res){
         orderId= "CBC"+ newNumber
     }
     const newOrderData = req.body
+
+    const newProductArray = []
+    for(let i=0;i<newOrderData.orderItems.length;i++){
+        const product = await product.findone({
+            productId:newOrderData.orderedItems[i].productId
+        })
+        if(product == null){
+            res.json({
+                message:"Product with id" + newOrderData.orderedItems[i].productId+"not found"
+            })
+            return
+        }
+        newProductArray[i]={
+            name:product.productName,
+            price:product.price,
+            quantity:newOrderData.orderedItems[i].quantity,
+            image:product.images[0]
+        }
+    }
+    console.log(newProductArray)
+    newOrderData.orderItems = newProductArray
+    
     newOrderData.orderId = orderId
     newOrderData.email = req.user.email
 
